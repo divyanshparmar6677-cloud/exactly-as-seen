@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ElectricityRouteImport } from './routes/electricity'
+import { Route as WaterRouteImport } from './routes/water'
 import { Route as ApiAdvisorRouteImport } from './routes/api/advisor'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ElectricityRoute = ElectricityRouteImport.update({
+  id: '/electricity',
+  path: '/electricity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WaterRoute = WaterRouteImport.update({
+  id: '/water',
+  path: '/water',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAdvisorRoute = ApiAdvisorRouteImport.update({
@@ -25,27 +37,35 @@ const ApiAdvisorRoute = ApiAdvisorRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/electricity': typeof ElectricityRoute
+  '/water': typeof WaterRoute
   '/api/advisor': typeof ApiAdvisorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/electricity': typeof ElectricityRoute
+  '/water': typeof WaterRoute
   '/api/advisor': typeof ApiAdvisorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/electricity': typeof ElectricityRoute
+  '/water': typeof WaterRoute
   '/api/advisor': typeof ApiAdvisorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/advisor'
+  fullPaths: '/' | '/electricity' | '/water' | '/api/advisor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/advisor'
-  id: '__root__' | '/' | '/api/advisor'
+  to: '/' | '/electricity' | '/water' | '/api/advisor'
+  id: '__root__' | '/' | '/electricity' | '/water' | '/api/advisor'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ElectricityRoute: typeof ElectricityRoute
+  WaterRoute: typeof WaterRoute
   ApiAdvisorRoute: typeof ApiAdvisorRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/electricity': {
+      id: '/electricity'
+      path: '/electricity'
+      fullPath: '/electricity'
+      preLoaderRoute: typeof ElectricityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/water': {
+      id: '/water'
+      path: '/water'
+      fullPath: '/water'
+      preLoaderRoute: typeof WaterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/advisor': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ElectricityRoute: ElectricityRoute,
+  WaterRoute: WaterRoute,
   ApiAdvisorRoute: ApiAdvisorRoute,
 }
 export const routeTree = rootRouteImport
