@@ -50,7 +50,7 @@ function Dashboard() {
           <p className="max-w-2xl opacity-90">Helping administrators and students at Shri Vaishnav Vidyapeeth Vishwavidyalaya, Indore track resource consumption, spot wastage and take measurable action.</p>
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="secondary"><Link to="/electricity">Add a record</Link></Button>
-            <Button asChild variant="outline" className="border-hero-foreground/40 bg-transparent text-hero-foreground hover:bg-hero-foreground/10 hover:text-hero-foreground"><Link to="/participate">Report wastage</Link></Button>
+            <Button asChild variant="outline" className="border-hero-foreground/40 bg-transparent text-hero-foreground hover:bg-hero-foreground/10 hover:text-hero-foreground"><Link to="/water">Water tracker</Link></Button>
           </div>
         </div>
       </section>
@@ -77,7 +77,7 @@ function Dashboard() {
       <section className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader className="flex-row items-center justify-between"><CardTitle className="font-display text-lg">Top insights (rule-based)</CardTitle>
-            <Button asChild size="sm" variant="ghost"><Link to="/advisor">Open advisor →</Link></Button></CardHeader>
+            <Button asChild size="sm" variant="ghost"><Link to="/electricity">Electricity →</Link></Button></CardHeader>
           <CardContent className="grid gap-3">
             {top.map((r) => (
               <div key={r.title} className="rounded-xl border bg-muted/40 p-4">

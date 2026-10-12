@@ -29,7 +29,7 @@ function Page() {
   return (
     <>
       <PageHeader eyebrow="Feature 2" title="Water Tracker" desc="Record water consumption and flag leaks or wastage.">
-        <Button asChild><Link to="/participate">Submit a wastage report</Link></Button>
+        
       </PageHeader>
       <ResourceTracker rows={rows} sections={sections} field="litres" unit="litres" schema={waterSchema} color="var(--color-chart-3)"
         pending={insert.isPending} onSubmit={(v) => insert.mutateAsync(v)}

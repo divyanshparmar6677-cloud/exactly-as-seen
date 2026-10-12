@@ -145,7 +145,7 @@ export function bySection<T extends { section_id: string }>(rows: T[], sections:
 }
 
 export function within<T extends { record_date: string }>(rows: T[], days: number) {
-  const since = lastNDays(days)[0];
+  const since = lastNDays(days)[0] ?? "";
   return rows.filter((r) => r.record_date >= since);
 }
 
@@ -182,9 +182,9 @@ export function ruleBasedAdvice(sections: Section[], e: ElecRec[], w: WaterRec[]
 
   // Week-over-week trend
   const wk = weeklySeries(e, (r) => r.kwh, 2);
-  if (wk[0].value > 0 && wk[1].value > wk[0].value * 1.1) {
+  if (wk[0]!.value > 0 && wk[1]!.value > wk[0]!.value * 1.1) {
     recs.push({ priority: "High", resource: "electricity", title: "Electricity rose more than 10% this week",
-      detail: `This week: ${fmt(wk[1].value)} kWh vs ${fmt(wk[0].value)} kWh last week. Review new equipment, events or lights left on.`, source: "Rule-based" });
+      detail: `This week: ${fmt(wk[1]!.value)} kWh vs ${fmt(wk[0]!.value)} kWh last week. Review new equipment, events or lights left on.`, source: "Rule-based" });
   }
 
   // Weekend baseload
@@ -215,7 +215,7 @@ export function ruleBasedAdvice(sections: Section[], e: ElecRec[], w: WaterRec[]
       paper: "Default to double-sided printing, digital submissions and paper recycling bins.",
       other: "Audit mixed waste and set up clear dry/wet/e-waste segregation.",
     };
-    recs.push({ priority: cat[0].kg / totalW > 0.4 ? "High" : "Medium", resource: "waste", title: `${cat[0].c[0].toUpperCase() + cat[0].c.slice(1)} is the largest waste stream`,
+    recs.push({ priority: cat[0]!.kg / totalW > 0.4 ? "High" : "Medium", resource: "waste", title: `${cat[0]!.c[0].toUpperCase() + cat[0]!.c.slice(1)} is the largest waste stream`,
       detail: `${fmt(cat[0].kg, 1)} kg (${fmt((cat[0].kg / totalW) * 100)}%) of recorded waste in 14 days. ${tips[cat[0].c]}`, source: "Rule-based" });
   }
   recs.push({ priority: "Low", resource: "other", title: "Run a student sustainability week",
