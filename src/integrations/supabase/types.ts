@@ -14,7 +14,221 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      campus_sections: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      electricity_records: {
+        Row: {
+          created_at: string
+          id: string
+          is_simulated: boolean
+          kwh: number
+          notes: string | null
+          record_date: string
+          section_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          kwh: number
+          notes?: string | null
+          record_date?: string
+          section_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          kwh?: number
+          notes?: string | null
+          record_date?: string
+          section_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "electricity_records_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "campus_sections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          created_at: string
+          description: string
+          id: string
+          is_simulated: boolean
+          kind: string
+          resource: string
+          section_id: string | null
+          status: string
+          submitter_name: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: string
+          is_simulated?: boolean
+          kind: string
+          resource: string
+          section_id?: string | null
+          status?: string
+          submitter_name?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: string
+          is_simulated?: boolean
+          kind?: string
+          resource?: string
+          section_id?: string | null
+          status?: string
+          submitter_name?: string | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "campus_sections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sustainability_actions: {
+        Row: {
+          completed: boolean
+          created_at: string
+          id: string
+          is_simulated: boolean
+          resource: string
+          title: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          resource: string
+          title: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          resource?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      waste_records: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          is_simulated: boolean
+          kg: number
+          notes: string | null
+          record_date: string
+          section_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          kg: number
+          notes?: string | null
+          record_date?: string
+          section_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          kg?: number
+          notes?: string | null
+          record_date?: string
+          section_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "waste_records_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "campus_sections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      water_records: {
+        Row: {
+          created_at: string
+          id: string
+          is_simulated: boolean
+          litres: number
+          notes: string | null
+          record_date: string
+          section_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          litres: number
+          notes?: string | null
+          record_date?: string
+          section_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_simulated?: boolean
+          litres?: number
+          notes?: string | null
+          record_date?: string
+          section_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "water_records_section_id_fkey"
+            columns: ["section_id"]
+            isOneToOne: false
+            referencedRelation: "campus_sections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
